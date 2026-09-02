@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f8fc">
+  <title>Cardfolio | Pokémon Collection Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">✦</span><span>cardfolio</span></div>
+      <div class="workspace-switcher"><span class="workspace-dot"></span><span>My collection</span><span class="chevron">⌄</span></div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <p class="nav-label">Workspace</p>
+        <button class="nav-item active" data-view="collection"><span class="nav-icon">▦</span> Collection <span class="nav-count" id="collectionCount">12</span></button>
+        <button class="nav-item" data-view="wishlist"><span class="nav-icon">♡</span> Wishlist <span class="nav-count">8</span></button>
+        <button class="nav-item" data-view="decks"><span class="nav-icon">◇</span> Decks <span class="nav-count">3</span></button>
+        <p class="nav-label nav-label-spaced">Manage</p>
+        <button class="nav-item" data-view="sets"><span class="nav-icon">◌</span> Sets</button>
+        <button class="nav-item" data-view="analytics"><span class="nav-icon">↗</span> Analytics</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="storage-card"><div class="storage-head"><span>Storage</span><strong>62%</strong></div><div class="storage-track"><span></span></div><small>124 of 200 cards</small></div>
+        <button class="nav-item"><span class="nav-icon">⚙</span> Settings</button>
+        <div class="user-profile"><div class="avatar">AC</div><div><strong>Alex Carter</strong><small>Personal account</small></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button><div class="breadcrumb"><span>Workspace</span><b>/</b><strong>Collection</strong></div><div class="top-actions"><button class="icon-button" title="Notifications" aria-label="Notifications">♢<i></i></button><button class="help-button">?</button><div class="top-avatar">AC</div></div></header>
+      <div class="content-wrap">
+        <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> COLLECTION OVERVIEW</div><h1>Your collection</h1><p>Keep every pull, trade, and treasure in one place.</p></div><button class="primary-button" id="openModal"><span>＋</span> Add card</button></section>
+
+        <section class="stats-grid" aria-label="Collection statistics">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">▦</span><span class="stat-trend positive">↗ 12.4%</span></div><div class="stat-value" id="totalCards">124</div><div class="stat-label">Total cards</div><div class="stat-note">+16 this month</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon mint">✧</span><span class="stat-trend positive">↗ 8.2%</span></div><div class="stat-value">$2,846.50</div><div class="stat-label">Collection value</div><div class="stat-note">Estimated market value</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon yellow">◒</span><span class="stat-trend positive">↗ 3 sets</span></div><div class="stat-value">18</div><div class="stat-label">Sets completed</div><div class="stat-note">Out of 42 tracked sets</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon coral">♡</span><span class="stat-trend neutral">2 to go</span></div><div class="stat-value">8</div><div class="stat-label">On your wishlist</div><div class="stat-note">2 added this week</div></article>
+        </section>
+
+        <section class="collection-section">
+          <div class="section-title-row"><div><h2>All cards <span id="resultCount">12</span></h2><p>Browse and manage your collection</p></div><div class="view-toggle"><button class="view-button active" data-layout="grid" aria-label="Grid view">▦</button><button class="view-button" data-layout="list" aria-label="List view">☷</button></div></div>
+          <div class="toolbar"><div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search cards, sets, or types..." aria-label="Search cards"></div><div class="filter-group"><select id="setFilter" aria-label="Filter by set"><option value="all">All sets</option><option value="sv151">Scarlet & Violet 151</option><option value="base">Base Set</option><option value="neo">Neo Genesis</option><option value="sv-obf">Obsidian Flames</option></select><select id="rarityFilter" aria-label="Filter by rarity"><option value="all">All rarities</option><option value="Illustration Rare">Illustration Rare</option><option value="Rare Holo">Rare Holo</option><option value="Ultra Rare">Ultra Rare</option><option value="Rare">Rare</option></select><select id="sortFilter" aria-label="Sort cards"><option value="recent">Recently added</option><option value="value-high">Value: high to low</option><option value="value-low">Value: low to high</option><option value="name">Name A-Z</option></select></div></div>
+          <div class="active-filters" id="activeFilters"></div>
+          <div class="card-grid" id="cardGrid"></div>
+          <div class="empty-state" id="emptyState" hidden><div class="empty-icon">⌕</div><h3>No cards found</h3><p>Try a different search or clear your filters.</p><button class="secondary-button" id="clearFilters">Clear filters</button></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close-modal" id="closeModal" aria-label="Close dialog">×</button><div class="modal-kicker">NEW ENTRY</div><h2 id="modalTitle">Add a card</h2><p>Log a new card in your collection.</p><form id="cardForm"><label>Card name<input name="name" required placeholder="e.g. Pikachu ex"></label><div class="form-row"><label>Set<select name="set"><option value="sv151">Scarlet & Violet 151</option><option value="base">Base Set</option><option value="neo">Neo Genesis</option><option value="sv-obf">Obsidian Flames</option></select></label><label>Rarity<select name="rarity"><option>Rare</option><option>Rare Holo</option><option>Illustration Rare</option><option>Ultra Rare</option></select></label></div><div class="form-row"><label>Condition<select name="condition"><option>Near Mint</option><option>Lightly Played</option><option>Moderately Played</option></select></label><label>Value<input name="value" type="number" min="0" step="0.01" placeholder="0.00"></label></div><div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancel</button><button type="submit" class="primary-button">Add to collection</button></div></form></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
